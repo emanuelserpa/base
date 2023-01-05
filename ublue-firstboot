@@ -121,7 +121,7 @@ fi
 echo "90"
 
 echo "# Installing Celluloid Media Player"
-/usr/bin/flatpak install --user --noninteractive flathub io.github.celluloid_player.Celluloid
+/usr/bin/flatpak install --user --noninteractive flathub io.mpv.Mpv
 if [ "$?" != 0 ] ; then
         zenity --error \
           --text="Installing Celluloid Failed"
