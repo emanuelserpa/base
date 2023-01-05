@@ -1,0 +1,366 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 17, // Waybar height (to be removed for auto height)
+    //"width": 1280, // Waybar width
+    "bar_id": "bar-0",   
+    "ipc": true,
+    "hidden_state": "modifier",
+    // Choose the order of the modules
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "custom/separator",
+        "custom/waybar-mpris"
+        //"sway/window"
+    ],
+    "modules-center": [ 
+        "clock"
+    ],
+    "modules-right": [
+        //"custom/spotify",
+        //"custom/ncspot",
+        //"custom/waybar-mpris",
+        //"custom/scratchpad-indicator",
+        "keyboard-state",
+        "custom/separator",
+        "idle_inhibitor",
+        "custom/separator",
+        "custom/arch-updates",
+        "custom/flatpak-updates",
+        "custom/separator",
+        "custom/weather",
+        "custom/separator",
+        "pulseaudio#sink",
+        "custom/separator",
+        "pulseaudio#source",
+        "custom/separator",
+        //"cpu",
+        //"memory", 
+        "temperature",
+        "custom/separator",
+        //"backlight",
+        "battery",
+        "custom/separator",
+        //"custom/bluetooth",
+        "tray",
+        "custom/separator",
+        //"custom/wlogout
+        "custom/notification"
+    ],
+    //Modules configuration
+    "sway/workspaces": {
+         "disable-scroll": true,
+         "all-outputs": true,
+        "format": "<span font='9'>{name}</span>",
+    //   "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+    //     }
+     },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+        "max-length": 80,
+    },
+    "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 2
+    },
+    "clock": 
+        {
+        "format": " {:%H:%M}",
+        //"format-alt": "  {:%A, %d de %B}",
+        "timezone": "America/Fortaleza",
+        "tooltip-format": "<big>    {:%d de %B}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%A, %d-%m-%Y}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format": " {}%",
+	"tooltip": true
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", ""],
+        "tooltip": false
+    },
+    "backlight": {
+        "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", ""],
+        "on-scroll-down": "brightnessctl set 1%-",
+        "on-scroll-up": "brightnessctl set +1%",
+        //"scroll-step": 0.1
+   },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 35,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        //"format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        //"format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+       "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        //"format-wifi":" {essid} ({signalStrength}%)",
+        "format-wifi": "",
+        "tooltip": true,
+        "tooltip-format": "{essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        //"format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "networkmanager_dmenu"
+    },
+     "pulseaudio#sink": {
+        "ignored-sinks": ["EasyEffects Sink"],
+        "scroll-step": 0.5, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
+        "format-bluetooth-muted": "  {icon}  {format_source}",
+        "format-muted": "",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click-right": "pavucontrol"
+        },
+        "pulseaudio#source": {
+        "ignored-sinks": ["EasyEffects Source"],
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click-right": "/usr/bin/pavucontrol",
+        "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+        "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%"
+        },
+        "custom/waybar-mpris": {
+        "return-type": "json",
+             "format-icons": {
+             "spotify": " ",
+             "default": "🎜"
+         },
+
+        "max-length": 40,
+        "exec": "waybar-mpris --play '' --pause '' --order 'SYMBOL:ARTIST:TITLE'",
+        "on-click": "waybar-mpris --send toggle",
+        // This option will switch between players on right click.
+        "on-click-right": "waybar-mpris --send player-next",
+    // The options below will switch the selected player on scroll
+        //"on-scroll-up": "waybar-mpris --send player-next",
+        //"on-scroll-down": "waybar-mpris --send player-prev",
+    // The options below will go to next/previous track on scroll
+        // "on-scroll-up": "waybar-mpris --send next",
+        // "on-scroll-down": "waybar-mpris --send prev",
+    "escape": true,
+    },
+    "wlr/taskbar": {
+        "icon-size": 16,
+        "on-click": "activate",
+        "on-click-right": "minimize",
+        "format": "{title}"
+    },
+    "custom/spotify": {
+        "format": "{icon} <b>{}</b>",
+            "min-length": 10,
+            "max-length": 60,
+        "tooltip": true,
+        "return-type": "json",
+            "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "on-click": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+        "on-click-middle": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+        "on-click-right": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Script in resources folder
+    },
+    "custom/ncspot": {
+        "format": "{icon} <b>{}</b>",
+            "min-length": 10,
+            "max-length": 60,
+        "tooltip": true,
+        "return-type": "json",
+            "format-icons": {
+            "ncspot": "",
+            "default": "🎜"
+        },
+        "on-click": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+        "on-click-middle": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+        "on-click-right": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player ncspot 2> /dev/null" // Script in resources folder
+    },
+    "custom/spotifyd": {
+        "format": "{icon} <b>{}</b>",
+            "min-length": 10,
+            "max-length": 60,
+        "tooltip": true,
+        "return-type": "json",
+            "format-icons": {
+            "spotifyd": "",
+            "default": "🎜"
+        },
+        "on-click": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+        "on-click-middle": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+        "on-click-right": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player spotifyd 2> /dev/null" // Script in resources folder
+    },
+     "custom/bluetooth": {
+        "format": "{}",
+        "interval": 10,
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "{}",
+        "format-icons": {
+          "enabled": " ",
+          "disabled": ""
+        },
+        "exec": "rofi-bluetooth --status",
+        //"on-click-right": "/usr/bin/rofi-bluetooth",
+        "on-click-right": "blueman-manager"
+    },
+    
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/waybar-wttr.py",
+        "return-type": "json"
+    },
+    "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+    "custom/scratchpad-indicator": {
+        "format-text": "{}",
+        "return-type": "json",
+        "interval": 3,
+        "exec": "~/bin/statusbar/scratchpad-indicator.sh 2> /dev/null",
+        "exec-if": "exit 0",
+        "on-click": "swaymsg 'scratchpad show'",
+        "on-click-right": "swaymsg 'move scratchpad'"
+  },
+    "custom/arch-updates": {
+        "format-text": "{}",
+        "return-type": "json",
+        "interval": 600,
+        "exec": "~/bin/statusbar/arch-updates.sh 2> /dev/null",
+        "exec-if": "exit 0",
+        "signal": 8
+  },
+      "custom/flatpak-updates": {
+        "format-text": "{}",
+        "return-type": "json",
+        "interval": 600,
+        "exec": "~/bin/statusbar/flatpak-updates.sh 2> /dev/null",
+        "exec-if": "exit 0",
+        "signal": 8
+  },
+
+  "custom/wlogout": {
+        "format": "",
+        "interval": "once",
+        "on-click": "wlogout -c 5 -r 5 -p layer-shell",
+  },
+  "custom/separator": {
+    "format": " ",
+    "interval": "once",
+    "tooltip": false
+  },
+  "keyboard-state": {
+      "numlock": false,
+      "capslock": true,
+      "format": "{icon}",
+      "format-icons": {
+          "locked": "",
+          "unlocked": ""
+      }
+  }
+}

@@ -1,0 +1,252 @@
+/* =============================================================================
+ *
+ * Waybar configuration
+ *
+ * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
+ *
+ * =========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+
+@import "dracula.css";
+/*@import "/home/emanuel/.cache/wal/colors-waybar.css";*/
+
+
+@keyframes blink-warning {
+    70% {
+	background-color: @background;
+    }
+
+    to {
+        background-color: #ffb86c;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      background-color: @background;
+    }
+
+    to {
+        background-color: @color1;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* The whole bar */
+#waybar {
+    background: @background;
+    opacity: 0.94;
+    color: @color7;
+    font-family: Ubuntu,"FontAwesome 5 Free Solid", Noto Sans, Helvetica, Arial, sans-serif;
+    /*font-family: Cantarell, Noto Sans, sans-serif;*/
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Each module */
+#idle_inhibitor,
+#battery,
+#clock,
+#cpu,
+#custom-keyboard-layout,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray 
+
+
+/* -----------------------------------------------------------------------------
+ * Module styles
+ * -------------------------------------------------------------------------- */
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius: 3px;
+    margin:2px;
+}
+#battery.warning {
+    color: @color7;
+}
+
+#battery.critical {
+    color: @color7;
+}
+#battery.charging{
+    background-color: @color4;
+}
+#battery.warning.charging{
+    color: @color7;
+    background-color: @color4;
+}
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    /*animation-name: blink-critical;
+    animation-duration: 1s;*/
+    background-color: @color1;
+}
+
+#clock {
+    font-weight: bold;
+    border-radius: 3px;
+    opacity: 0.9;
+    font-size: 12px;
+    background-color: @color7;
+    color: @background;
+}
+
+#cpu {
+    border-radius:3px;
+    margin:2px;
+}
+
+#cpu.warning {
+    background-color: #ffb86c;
+}
+
+#cpu.critical {
+    background-color: @color1;
+}
+
+#memory {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius: 3px;
+    margin:2px;
+}
+
+#memory.warning {
+    background-color: #ffb86c;
+}
+
+#memory.critical {
+    color: @color1;
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+#mode {
+    background: @color12;
+    color: @background;
+    border-radius: 3px;
+    /*border-top: 2px solid #FF80BF;*/
+    /* To compensate for the top border and still have vertical centering */
+}
+
+#network {
+    font-size:13px;
+
+}
+
+#network.disconnected {
+    color: #ffb86c;
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+    /*padding-bottom:2spx*/
+}
+
+#custom-media {
+   color:@background;
+   margin:2px;
+   /*background-color: rgb(102, 220, 105);*/
+   background-color: @color2;
+   border-radius: 3px;
+   font-size:12px;
+   font-weight: normal;
+}
+
+#temperature {
+    border-radius:3px;
+    margin:2px;
+}
+
+#temperature.critical {
+    background-color: #ff5555;
+}
+
+#tray{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+#window {
+    font-weight: bold;
+}
+#workspaces{
+    font-size:12px;
+}
+#workspaces button {
+    /*border-top: 0.5px solid transparent;*/
+    /* To compensate for the top border and still have vertical centering */
+    /*color: #888888;*/
+    color: @color7;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#workspaces button.urgent{
+    /*background-color: #FF80BF;*/
+    background-color: @background;
+    color: @color5;
+}
+
+#workspaces button.focused {
+    background-color: @color7;
+    /*background-color: #44475a;*/
+    /*color: #FF80BF;*/
+    color: @background;
+}
+#idle_inhibitor{
+
+}
+#idle_inhibitor.activated{
+    padding-right:3px;
+    color: @color5;
+}
+#idle_inhibitor.deactivated{
+    padding-top:2px;
+}
+#backlight {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+#custom-bluetooth {
+  padding-left: 2px;
+  padding-right:3px;
+  font-weight: normal;
+  font-size: 13px;
+}
+#custom-weather {
+   background-color: @background;
+   padding-right: 4px;
+   color: @color7;
+   margin: 2px;
+}

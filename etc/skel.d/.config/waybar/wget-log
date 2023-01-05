@@ -1,0 +1,12 @@
+--2021-06-10 17:41:31--  https://i.scdn.co/image/ab67616d0000b273638506a24f769a74524b950f
+Carregou certificado CA "/etc/ssl/certs/ca-certificates.crt"
+Resolvendo i.scdn.co (i.scdn.co)... 199.232.114.248, 2a04:4e42:5c::760
+Conectando-se a i.scdn.co (i.scdn.co)|199.232.114.248|:443... conectado.
+A requisição HTTP foi enviada, aguardando resposta... 200 OK
+Tamanho: 107725 (105K) [image/jpeg]
+Salvando em: “/tmp/spotart”
+
+/tmp/spotart              0%[                                ]       0  --.-KB/s               /tmp/spotart             68%[====================>           ]  72,30K   333KB/s               /tmp/spotart            100%[===============================>] 105,20K   428KB/s    em 0,2s    
+
+2021-06-10 17:41:31 (428 KB/s) - “/tmp/spotart” salvo [107725/107725]
+

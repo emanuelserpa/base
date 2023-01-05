@@ -1,0 +1,237 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "left", // Waybar position (top|bottom|left|right)
+    //"height": 23, // Waybar height (to be removed for auto height)
+    "width": 23, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": [ ],
+    "modules-right": ["custom/media","idle_inhibitor","pulseaudio#sink", "pulseaudio#source", /*"cpu", "memory",*/ "temperature", "backlight", /*"sway/language",*/ "battery", "custom/bluetooth","tray","clock"],
+    //Modules configuration
+    "sway/workspaces": {
+         "disable-scroll": true,
+         "all-outputs": true,
+        "format": "{name}",
+    //   "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
+     },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+        "max-length": 80,
+    },
+    "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 2
+    },
+    "clock": 
+        {
+        "format": "{:%H\n%M}",
+        //"format-alt": "{:%a, %d de %B de %Y}",
+        "timezone": "America/Fortaleza",
+        "tooltip-format": "<big>    {:%B de %Y}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%A, %d-%m-%Y}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format": " {}%",
+	"tooltip": true
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon}",
+        "tooltip": true,
+        "tooltip-format": "{temperatureC}°C",
+        "format-icons": ["", ""],
+    },
+    "backlight": {
+        "device": "acpi_video1",
+        "format": "{icon}",
+        "tooltip": true,
+        "tooltip-format":"{percent}%",
+        "format-icons": ["", ""],
+        "on-scroll-down": "brightnessctl set 1%-",
+        "on-scroll-up": "brightnessctl set +1%",
+        //"scroll-step": 0.1
+   },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 35,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-charging": " ",
+        "tooltip-format": "{capacity}%",
+        "format-plugged": " ",
+        "format-alt": "{time}\n{icon}",
+        // "format-good": "", // An empty format will hide the module
+        //"format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+       "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        //"format-wifi":" {essid} ({signalStrength}%)",
+        "format-wifi": "",
+        "tooltip": true,
+        "tooltip-format": "{essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        //"format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "networkmanager_dmenu"
+    },
+     "pulseaudio#sink": {
+        "scroll-step": 0.5, // %, can be a float
+        "format": "{icon}",
+        "tooltip": true,
+        "tooltip-format": "{volume}%",
+        "format-bluetooth": "{volume}% {icon}\n{format_source}",
+        "format-bluetooth-muted": "  {icon}  {format_source}",
+        "format-muted": "",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click-right": "pavucontrol"
+        },
+        "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": "",
+        "tooltip-format": "{volume}%",
+        "format-source-muted": "",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click-right": "/usr/bin/pavucontrol",
+        "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+        "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%"
+        },
+        "custom/waybar-mpris": {
+        "return-type": "json",
+        "max-length": 40,
+        "exec": "waybar-mpris --position --autofocus",
+        "on-click": "waybar-mpris --send toggle",
+        // This option will switch between players on right click.
+        "on-click-right": "waybar-mpris --send player-next",
+    // The options below will switch the selected player on scroll
+        // "on-scroll-up": "waybar-mpris --send player-next",
+        // "on-scroll-down": "waybar-mpris --send player-prev",
+    // The options below will go to next/previous track on scroll
+        // "on-scroll-up": "waybar-mpris --send next",
+        // "on-scroll-down": "waybar-mpris --send prev",
+    "escape": true,
+    },
+    "wlr/taskbar": {
+        "icon-size": 12,
+        "on-click": "activate",
+        "on-click-right": "minimize",
+        "format": "{icon}"
+    },
+    "custom/media": {
+        "format": "{icon} <b>{}</b>",
+            "min-length": 10,
+            "max-length": 60,
+        "tooltip": true,
+        "return-type": "json",
+            "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        //"on-click": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+       "on-click": "playerctl -p spotpris play-pause",
+       "on-click-middle": "playerctl -p spotpris previous",
+       "on-click-right": "playerctl -p spotpris next",
+        //"on-click-middle": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+        //"on-click-right": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+        "escape": true,
+        //"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "exec": "$HOME/.config/waybar/mediaplayer2.py --player spotpris 2> /dev/null" // Filter player based on name
+    },
+     "custom/bluetooth": {
+        "format": "{}",
+        "interval": 10,
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "{}",
+        "format-icons": {
+          "enabled": " ",
+          "disabled": ""
+        },
+        "exec": "rofi-bluetooth --status",
+        //"on-click-right": "/usr/bin/rofi-bluetooth",
+        "on-click-right": "blueman-manager"
+    },
+    
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/waybar-wttr.py",
+        "return-type": "json"
+    }
+}
+

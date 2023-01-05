@@ -1,0 +1,336 @@
+/* =============================================================================
+ *
+ * Waybar configuration
+ *
+ * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
+ *
+ * =========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+
+@import "dracula.css";
+/*@import "/home/emanuel/.cache/wal/colors-waybar.css";*/
+
+@keyframes blink-warning {
+    70% {
+	background-color: @background;
+    }
+
+    to {
+        background-color: #ffb86c;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      background-color: @background;
+    }
+
+    to {
+        background-color: @color1;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+
+/* Reset all styles */
+/* {
+    all: unset;
+}*/
+* {
+    box-shadow:unset;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    color:unset;
+    font:unset;
+}
+
+/* The whole bar */
+#waybar {
+    background: @background;
+    opacity: 0.94;
+    color: @color7;
+    font-family: Noto Sans,"FontAwesome 5 Free Solid", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+tooltip {
+  background: @background;
+  opacity: 0.94;
+}
+tooltip label {
+  color: white;
+}
+
+/* Each module */
+#idle_inhibitor,
+#battery,
+#clock,
+#cpu,
+#custom-keyboard-layout,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray 
+
+
+/* -----------------------------------------------------------------------------
+ * Module styles
+ * -------------------------------------------------------------------------- */
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius: 3px;
+    margin:2px;
+    padding-left:2px;
+    padding-right: 2px;
+}
+#battery.warning {
+    color: @color7;
+}
+
+#battery.critical {
+    color: @color7;
+}
+#battery.charging{
+    background-color: @color4;
+}
+#battery.warning.charging{
+    color: @color7;
+    background-color: @color4;
+}
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    /*animation-name: blink-critical;
+    animation-duration: 1s;*/
+    background-color: @color1;
+}
+
+#clock {
+    border-radius: 3px;
+    opacity: 0.9;
+    padding-left:5px;
+    padding-right:5px;
+    font-size: 13px;
+    background-color: @color7;
+    color: @background;
+}
+
+#cpu {
+    border-radius:3px;
+    margin:2px;
+    padding-left:2px;
+    padding-right:2px;
+}
+
+#cpu.warning {
+    background-color: #ffb86c;
+}
+
+#cpu.critical {
+    background-color: @color1;
+}
+
+#memory {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius: 3px;
+    margin:2px;
+    padding-left:2px;
+    padding-right:2px;
+}
+
+#memory.warning {
+    background-color: #ffb86c;
+}
+
+#memory.critical {
+    color: @color1;
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+#mode {
+    background: @color10;
+    color: @background;
+    border-radius: 3px;
+    /*border-top: 2px solid #FF80BF;*/
+    /* To compensate for the top border and still have vertical centering */
+    padding-right:5px;
+    padding-left:5px;
+}
+
+#network {
+    font-size:13px;
+
+}
+
+#network.disconnected {
+    color: #ffb86c;
+}
+
+#pulseaudio {
+    padding-left: 2px;
+}
+
+#pulseaudio.muted {
+    /*padding-bottom:2spx*/
+}
+
+#custom-spotify {
+   color:@background;
+   margin:2px;
+   /*background-color: rgb(102, 220, 105);*/
+   background-color: @color2;
+   border-radius: 3px;
+   padding-left: 3px;
+   padding-right: 3px;
+   font-size:12px;
+   font-weight: normal;
+}
+
+#custom-ncspot {
+   color:@background;
+   margin:2px;
+   /*background-color: rgb(102, 220, 105);*/
+   background-color: @color2;
+   border-radius: 3px;
+   padding-left: 3px;
+   padding-right: 3px;
+   font-size:12px;
+   font-weight: normal;
+}
+
+#custom-waybar-mpris {
+   color:@background;
+   margin:2px;
+   /*background-color: rgb(102, 220, 105);*/
+   background-color: @color13;
+   border-radius: 3px;
+   padding-left: 6px;
+   padding-right: 3px;
+   border-right: 10px;
+   font-size: 12px;
+   font-family: "Noto Sans Nerd Font";
+}
+
+#temperature {
+    border-radius:3px;
+    margin:2px;
+    padding-left:2px;
+    padding-right:2px;
+}
+
+#temperature.critical {
+    background-color: #ff5555;
+}
+
+#tray{
+    font-weight: normal;
+    padding-right: 4px;
+    padding-left: 4px;
+    font-size: 14px;
+}
+
+#window {
+    font-weight: bold;
+    padding-left: 10px;
+}
+#workspaces{
+    padding-right: 5px;
+    font-size:11.5px;
+}
+#workspaces button {
+    /*border-top: 0.5px solid transparent;*/
+    /* To compensate for the top border and still have vertical centering */
+    padding-left: 4px;
+    padding-right: 4px;
+    /*color: #888888;*/
+    color: @color7;
+    border-radius: 4px;
+}
+
+#workspaces button.urgent{
+    /*background-color: #FF80BF;*/
+    background-color: @background;
+    color: @color5;
+}
+
+#workspaces button.focused {
+    background-color: @color7;
+    /*background-color: #44475a;*/
+    /*color: #FF80BF;*/
+    color: @background;
+}
+#idle_inhibitor{
+
+}
+#idle_inhibitor.activated{
+    color: @color5;
+}
+#idle_inhibitor.deactivated{
+    padding-top:2px;
+}
+#backlight {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+#custom-bluetooth {
+  padding-left: 2px;
+  padding-right:3px;
+  font-weight: normal;
+  font-size: 13px;
+}
+#custom-weather {
+   background-color: @background;
+   color: @color7;
+   margin: 2px;
+}
+#custom-notification {
+  font-size: 13px;
+  padding-left: 4px;
+  padding-right: 6px;
+}
+#custom-arch-updates {    
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#custom-scratchpad-indicator {
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-bottom: 1px;
+}
+#custom-wlogout {
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-top: 2px;
+  font-size: 11px;
+  color: @background;
+  background-color: @color12;
+  border: 1px;
+  border-radius: 3px;
+  border-style: solid;
+  border-color: @background;
+  margin: 2px;
+}
+
+#custom-separator {
+  color: #1B5E20;
+  margin: 0 1px;
+}

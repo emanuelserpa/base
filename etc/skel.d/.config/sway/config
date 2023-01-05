@@ -1,0 +1,433 @@
+#Sway config file
+#
+
+# vim: filetype=i3config
+
+include ~/.config/sway/dracula
+#include ~/.config/azote/azotebg
+
+mouse_warping none
+focus_follows_mouse no
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango: Noto Sans Nerd Bold 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+
+floating_modifier $mod
+
+# Window border colors
+# class                    border  bground     text        indicato    child_border
+client.focused             $color1 $color1     $background $color1   $color1  
+client.focused_inactive    $color0 $color0     $foreground $background $background
+client.unfocused           #1E1F29 #1E1F29 $foreground #1E1F29 #1E1F29
+client.urgent              $color0 $color5     $foreground $color5     $color5
+
+# class                 border  bground text    indicato child_border
+#client.focused          #9580FF #9580FF #F8F8F2 #6272A4   #9580FF
+#client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+#client.unfocused        #282A36 #22212C #BFBFBF #282A36   #282A36
+#client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+#client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+#client.background       #F8F8F2
+titlebar_padding 5 3
+# start a terminal
+set $terminal "footclient"
+bindsym $mod+t exec $terminal
+# browser
+set $browser "org.mozilla.firefox"
+bindsym $mod+q exec $browser
+#clipboard manager
+bindsym $mod+c exec "copyq toggle" 
+#password manager
+bindsym $mod+p exec "rofi-rbw --selector rofi"
+# Switcher
+bindsym $mod+Tab exec "swayr switch-window"
+# Screenshots
+bindsym Control+Print exec "grimshot copy output"
+bindsym Control+Mod1+Print exec "grimshot copy window"
+bindsym Shift+Control+Print exec "grimshot copy area"
+bindsym Print exec "grimshot save output"
+bindsym Shift+Print exec "grimshot save area"
+bindsym Alt+Print exec "grimshot save window"
+bindsym $mod+Print exec "grimshot save screen - | swappy -f -" 
+bindsym $mod+Shift+Print exec "grimshot save area - | swappy -f -"
+bindsym $mod+Mod1+Print exec "grimshot save window - | swappy -f -"
+#bindsym $mod+s exec "wl-paste -t image/png | swappy -f -"
+bindsym $mod+v exec "~/bin/catbox -c"
+#change output
+bindsym $mod+s exec rofi -show rofi-sound -modi "rofi-sound:rofi-sound-output-chooser"
+
+#NetworkManager
+bindsym $mod+n exec "/usr/bin/networkmanager_dmenu"
+
+#BluetoothManager
+bindsym $mod+b exec "/usr/bin/rofi-bluetooth"
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+w close
+
+
+# start dmenu (a program launcher)
+set $menu j4-dmenu-desktop --dmenu='bemenu -iwn -p "Run:" --fn "Noto Sans Nerd 10" --tb="#6272a4" --tf="#f8f8f2" --hb="#44475a" --hf="#50fa7b" --nb="#282a36"' --term='foot'
+#bindsym $mod+d exec $menu
+bindsym $mod+d exec "wofi -I -i -S drun,run -a --width 400 --height 400 -y 5 -x 480"
+#Files
+
+bindsym $mod+Shift+f exec "wofer"
+
+#emojis
+bindsym $mod+Return exec "rofimoji --selector wofi"
+
+#Media control
+bindsym $mod+period exec "waybar-mpris --send next"
+bindsym $mod+comma exec "waybar-mpris --send prev"
+bindsym $mod+semicolon exec "waybar-mpris --send toggle"
+
+bindsym Control+$mod+period exec "waybar-mpris --send player-next"         
+bindsym Control+$mod+comma exec "waybar-mpris --send player-prev"          
+
+
+#fn control
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym $mod+F3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym $mod+F2 exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+F1 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+F4 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- &&  notify-send --expire-time=200 "Backlight $(printf %.0f%% $(brightnessctl -P get))"
+bindsym $mod+F5 exec brightnessctl set 5%- &&  notify-send --expire-time=200 "Backlight $(printf %.0f%% $(brightnessctl -P get))"
+
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% &&  notify-send --expire-time=200 "Backlight $(printf %.0f%% $(brightnessctl -P get))"
+bindsym $mod+F6 exec brightnessctl set +5% &&  notify-send --expire-time=200 "Backlight $(printf %.0f%% $(brightnessctl -P get))"
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+slash split h
+
+# split in vertical orientation
+bindsym $mod+minus split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s sticky toggle
+
+# change focus between tiling / floating windows
+    bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+    bindsym $mod+a focus parent
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+x move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+x scratchpad show
+
+# focus the child container
+#bindsym $mod+d focus child
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
+
+exec --no-startup-id swaymsg 'rename workspace "1" to "1 "'
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+#bindsym $mod+x workspace next
+#bindsym $mod+z workspace prev
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+r reload
+
+# move focused workspace between monitors
+bindsym $mod+Shift+period move workspace to output right
+bindsym $mod+Shift+comma move workspace to output left
+
+# exit Sway (logs you out of your Wayland session)
+bindsym Control+Mod1+Backspace exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will shrink the window’s width.
+        # Pressing up will grow the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#Window Behavior
+for_window [app_id="firefox" title="^Picture-in-Picture$"] \
+    floating enable, resize set 521 298
+for_window [app_id="python3" title="^OpenSnitch Network Statistics 1.3.6$"] \
+    floating enable
+for_window [app_id="python3" title="^OpenSnitch v1.3.6$"] \
+    floating enable
+
+
+#assign [app_id="mpv"] $ws6
+#assign [name="Netflix - Mozilla Firefox"] $ws6
+assign [app_id="ICE-SSB-primevideo"] $ws4
+#assign [app_id="kitty"] workspace $ws2
+#assign [app_id="firefox"] workspace $ws1
+#for_window [app_id="firefox"] layout tabbed
+assign [class="vlc"] $ws4
+for_window [class="vlc"] layout tabbed 
+for_window [class="Spotify"] move to workspace $ws4
+assign [class="discord"] $ws3
+for_window [class="discord"] layout tabbed
+assign [class="^Steam$"] $ws9
+for_window [class="winbox.exe"] layout tabbed
+assign [class="winbox.exe"] $ws8
+for_window [class="^Steam$"] layout tabbed
+for_window [app_id="copyq"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+assign [app_id="thunar"] $ws5
+assign [app_id="pcmanfm"] $ws5
+assign [app_id="org.qbittorrent.qBittorrent"] $ws5
+for_window [app_id="org.qbittorrent.qBittorrent"] # layout tabbed
+#for_window [app_id="Netflix - Mozilla Firefox"] layout tabbed
+#for_window [app_id="ICE-SSB-primevideo"] layout tabbed
+
+#Messaging apps
+assign [app_id="org.telegram.desktop"] $ws3
+for_window [app_id="org.telegram.desktop"] layout tabbed
+for_window [app_id="org.telegram.desktop" title="^TelegramDesktop$"] floating enable
+assign [class="whatsapp-nativefier-d40211"] $ws3
+for_window [class="whatsapp-nativefier-d40211"] layout tabbed
+assign [class="Hexchat"] $ws3
+for_window [class="Hexchat"] layout tabbed
+assign [app_id="dino"] $ws3
+for_window [app_id="dino"] layout tabbed
+assign [class="Element"] $ws3
+for_window [class="Element"] layout tabbed
+assign [app_id="thunderbird"] $ws3                   
+for_window [app_id="thunderbird"] layout tabbed    
+for_window [app_id="blueman-manager"] floating enable
+#Misc apps
+assign [class="Authy Desktop"] $ws8
+for_window [class="Authy Desktop"] layout tabbed
+assign [class="Gimp-2.10"] $ws8
+for_window [class="Gimp-2.10"] layout tabbed
+assign [class="Binance"] $ws10
+#for_window [app_id="mpv"] floating enable, focus;
+#for_window [app_id="firefox" title="Firefox - Indicador de compartilhamento"] kill
+
+
+#Borders
+#for_window [class="^.*"] border pixel 0.8
+default_border pixel 1
+hide_edge_borders smart
+focus_on_window_activation urgent
+
+#Gaps
+workspace $ws2 gaps inner 3 
+workspace $ws2 gaps outer 1
+smart_gaps on
+#bindsym $mod+s	gaps outer current plus 1
+#bindsym $mod+Shift+z	gaps outer current minus 5
+#bindsym $mod+g gaps inner current set +1; gaps outer current set 0
+#bindsym $mod+Shift+g gaps inner current set -1; gaps outer current set 0
+
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout "us"
+    xkb_variant "intl"
+    #xkb_options grp:alt_shift_toggle
+}
+input "1452:591:Keychron_Keychron_K2" {
+    xkb_layout "us"
+    xkb_variant "intl"
+}
+input "1452:591:Keychron_K2" {
+    xkb_layout "us"     
+    xkb_variant "intl"  
+} 
+input type:pointer {
+    accel_profile "adaptive"
+    pointer_accel 1
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll disabled
+    }
+##desabilitar xwayland
+#xwayland disable
+
+# Configuração Multi-monitor
+output 'Samsung Electric Company SAMSUNG 0x00000000' pos 1366 0 res 1366x768
+output 'Chimei Innolux Corporation 0x1490 0x00000000' pos 0 0 res 1366x768
+output 'Goldstar Company Ltd E1941 ' pos 2732 0 res 1366x768
+# workspace $ws2 output DP-6
+
+# Wallpapers
+exec ~/.config/azote/azotebg
+#exec swaybg -o 'Chimei Innolux Corporation 0x1490 0x00000000' -i '/home/emanuel/emanuelvserpa@gmail.com/Wallpapers/horizontal/57129082_0.jpg' -m fill &
+#exec swaybg -o 'Goldstar Company Ltd E1941 ' -i '/home/emanuel/emanuelvserpa@gmail.com/Wallpapers/horizontal/wp5118469.jpg' -m fill &
+#exec swaybg -o 'Samsung Electric Company SAMSUNG 0x00000000' -i '/home/emanuel/emanuelvserpa@gmail.com/Wallpapers/horizontal/prism3.png' -m fill &
+
+#desativar TV por padrão
+
+output 'Samsung Electric Company SAMSUNG 0x00000000' disable 
+
+set $lock_bg /home/emanuel/emanuelvserpa@gmail.com/Wallpapers/horizontal/1611688827210.jpg
+#set $swaylock 'swaylock --clock --indicator-idle-visible --indicator-radius 100 --indicator-thickness 7 --effect-vignette 0.5:0.5 -f -c 000000 --grace 0 --fade-in 0.2 -i $lock_bg'
+#set $swaylock 'swaylock --indicator-idle-visible --indicator-radius 100 --indicator-thickness 7 -i $lock_bg -f -c 000000'
+set $swaylock 'gtklock -d'
+
+# Atalho swaylock
+bindsym Control+$mod+l exec $swaylock
+
+
+exec swayidle -w \
+     timeout 20 'if pgrep gtklock; then swaymsg "output * dpms off"; fi' resume 'swaymsg "output * dpms on"'\
+     timeout 60 'if cat /sys/class/power_supply/BAT0/status | grep "Discharging    " > /dev/null && cat /proc/acpi/button/lid/LID/state | grep "closed" > /dev/null; then systemctl suspend; fi' \
+     timeout 300 $swaylock \
+     timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'\
+	 timeout 480 'if cat /sys/class/power_supply/BAT0/status | grep "Discharging" > /dev/null; then systemctl suspend; fi'\
+	 before-sleep $swaylock \
+	 lock $swaylock
+
+exec systemctl --user import-environment
+exec systemctl --user start sway-session.target
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+exec /usr/lib/sway-systemd/session.sh --with-cleanup
+exec /usr/lib/sway-systemd/assign-cgroups.py
+
+# Notification Daemon
+#exec swaync
+exec mako
+
+# Toggle control center
+#bindsym $mod+Shift+n exec swaync-client -t -sw
+
+exec {
+     "/usr/lib/gsd-xsettings"
+     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+     "nm-applet --indicator"
+     "env XDG_CURRENT_DESKTOP=Unity insync start"
+     "blueman-applet"
+     "foot --server"
+     "sleep 10s && copyq"
+     "env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1"
+     "autotiling -w 2 5"
+     "/usr/lib/geoclue-2.0/demos/agent"
+     "gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
+     #"gnome-software --gapplication-service"
+     #"easyeffects --gapplication-service"
+     "flatpak run com.github.bajoja.indicator-kdeconnect"
+}
+# japanese input
+#exec ibus-daemon -drx --panel /usr/lib/ibus/ibus-ui-gtk3
+#exec ibus engine xkb:br::por; mode "default"
+bindsym $mod+Escape seat default pointer_constraint escape
+bindsym $mod+i mode "j: japanese; esc: portuguese"
+    mode "j: japanese; esc: portuguese" {
+        bindsym j exec ibus engine anthy; mode "default"
+        bindsym Return exec ibus engine xkb:br::por; mode "default"
+        bindsym Escape exec ibus engine xkb:br::por; mode "default"
+    }
+bindsym Control+Shift+Space exec --no-startup-id makoctl restore
+
+bar {
+    swaybar_command waybar
+}

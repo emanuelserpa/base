@@ -1,0 +1,20 @@
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+[
+  {
+    "success": false,
+    "parse_error": true,
+    "error": "There is no workspace with that name"
+  }
+]
+[2021-03-07 00:01:28.587] [info] Resources files: /home/emanuel/.config/waybar/config, /home/emanuel/.config/waybar/style.css
+[2021-03-07 00:01:53.644] [warning] For a functional tray you must have libappindicator-* installed and export XDG_CURRENT_DESKTOP=Unity
+[2021-03-07 00:01:53.645] [warning] As using a timezone, some format args may be missing as the date library havn't got a release since 2018.
+03:01:53:0779 Gs  enabled plugins: desktop-categories, fwupd, os-release, provenance, appstream, provenance-license, desktop-menu-path, flatpak, generic-updates, hardcoded-blocklist, hardcoded-popular, modalias, rewrite-resource, icons, malcontent, odrs, key-colors, key-colors-metadata
+03:01:53:0779 Gs  disabled plugins: dpkg, dummy, fedora-langpacks, fedora-pkgdb-collections, repos
+[2021-03-07 00:01:54.122] [info] Bar configured (width: 1366, height: 22) for output: eDP-1
+[
+  {
+    "success": true
+  }
+]
+03:01:59:0393 Gdk Error reading events from display: Pipe quebrado
