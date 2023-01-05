@@ -8,8 +8,9 @@ COPY etc /etc
 COPY ublue-firstboot /usr/bin
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
-    rpm-ostree install distrobox gnome-tweaks && \
+    rpm-ostree install distrobox gnome-tweaks sway wofi rofi-wayland swaylock swayidle waybar fontawesome-fonts && \
     sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
     systemctl enable flatpak-automatic.timer && \
+    systemctl disable gdm.service && \
     ostree container commit
